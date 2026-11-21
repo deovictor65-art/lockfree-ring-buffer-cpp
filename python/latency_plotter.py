@@ -1,18 +1,19 @@
 """
 Python Lock-Free Latency Benchmark Visualizer
-Plots latency distribution percentiles (p50, p99, p99.9) for inter-thread communication.
+Computes latency distribution percentiles (p50, p99, p99.9) for inter-thread communication using standard library.
 """
 
-import numpy as np
+import random
 
 def analyze_mock_latency_profile():
-    # Model 10 million transactions: lognormal micro-latency profile
-    latencies_ns = np.random.lognormal(mean=2.5, sigma=0.4, size=100000)
+    random.seed(42)
+    # Model 10,000 transactions: lognormal micro-latency profile
+    latencies = sorted([random.lognormvariate(2.5, 0.4) for _ in range(10000)])
 
-    p50 = np.percentile(latencies_ns, 50)
-    p95 = np.percentile(latencies_ns, 95)
-    p99 = np.percentile(latencies_ns, 99)
-    p999 = np.percentile(latencies_ns, 99.9)
+    p50 = latencies[int(len(latencies) * 0.50)]
+    p95 = latencies[int(len(latencies) * 0.95)]
+    p99 = latencies[int(len(latencies) * 0.99)]
+    p999 = latencies[int(len(latencies) * 0.999)]
 
     print(f"[*] Lock-Free SPSC Ring Buffer Synthetic Latency Profile:")
     print(f"    p50:   {p50:.1f} ns")

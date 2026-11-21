@@ -9,7 +9,7 @@ find_package(Threads REQUIRED)
 if (MSVC)
     add_compile_options(/W4 /O2 /permissive-)
 else()
-    add_compile_options(-Wall -Wextra -Wpedantic -O3 -march=native)
+    add_compile_options(-Wall -Wextra -Wpedantic -O3)
 endif()
 
 add_library(lockfree_core INTERFACE)

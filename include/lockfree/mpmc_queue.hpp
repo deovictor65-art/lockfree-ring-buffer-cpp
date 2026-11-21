@@ -3,6 +3,8 @@
 #include "spsc_queue.hpp"
 #include <atomic>
 #include <vector>
+#include <cstddef>
+#include <new>
 
 namespace lockfree {
 
